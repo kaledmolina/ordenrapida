@@ -17,6 +17,10 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Pages\Tenancy\RegisterTeam;
+use App\Models\Team;
+
+
 
 class PanelPanelProvider extends PanelProvider
 {
@@ -53,6 +57,9 @@ class PanelPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->tenant(Team::class)
+            ->tenantRegistration(RegisterTeam::class)
+            ->registration();
     }
 }
